@@ -28,6 +28,7 @@ body {
 .header .header__logo {
   width: 50px;
   background: white;
+  cursor: pointer;
 }
 
 
@@ -46,7 +47,7 @@ body {
   padding: 10px 15px;
   background: #eee;
   margin-right: 0px;
-
+  cursor: pointer;
 }
 
 .header__button:hover {
@@ -377,6 +378,7 @@ input[type="checkbox"] {
 }
 
 .welcome__foot-addorder-btn {
+  cursor: pointer;
   font-family: 'Open Sans';
   box-shadow: 0 3px 5px rgba(0, 0, 0, .1);
   font-size: 16px;
@@ -740,5 +742,69 @@ Welcome page and it's context
   .welcome {
     margin: 15px;
     max-width: 400px;
+  }
+}
+
+
+@media screen and (max-width: 374px) {
+  .signin__head__title {
+    font-size: 18px;
+
+  }
+
+  .btn-fullwidth {
+    font-size: 13px;
+  }
+
+  .forgotPassword__head__title {
+    font-size: 18px;
+  }
+
+  .header .header__logo {
+    width: 40px;
+  }
+
+
+  .signin__head img {
+    width: 100px;
+
+  }
+}
+
+@media screen and (max-width: 345px) {
+  .signin__head__title {
+    font-size: 16px;
+
+  }
+
+  .forgotPassword__head__title {
+    font-size: 16px;
+  }
+
+  .signin__head img {
+    width: 90px;
+
+  }
+
+}
+
+@media screen and (max-width: 316px) {
+  .signin__head__title {
+    font-size: 15px;
+  }
+
+  .forgotPassword__head__title {
+    font-size: 15px;
+  }
+
+  .signin__head img {
+    width: 80px;
+
+  }
+}
+
+@media screen and (max-width: 321px) {
+  .forgotPassword__head__title {
+    font-size: 15px;
   }
 }

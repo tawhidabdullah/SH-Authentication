@@ -3,7 +3,8 @@ import {
   REGISTERING_USER_SUCCESS,
   SIGNIN_USER_START,
   SIGNIN_USER_SUCCESS,
-  SIGNIN_USER_SUCCESS__FAILD
+  SIGNIN_USER_SUCCESS__FAILD,
+  LOGOUT_USER
 } from '../actions/types'
 
 const initialState = {
@@ -61,8 +62,13 @@ const authReducer = (state = initialState, action) => {
               isAuthenticated: true,
               isErrorWhenAuthenticating: true
           }
-          default:
-            return state;
+          case LOGOUT_USER:
+            return {
+              ...state,
+              isAuthenticated: false
+            }
+            default:
+              return state;
   }
 }
 

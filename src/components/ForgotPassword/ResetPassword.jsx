@@ -27,7 +27,6 @@ const ResetPassword = (props) => {
       formErrors.notSame = "Please fill the Password Feild"
     }
     else formErrors.notSame = ""
-
     if (formErrors.notSame) {
       setFormValues({
         ...fromValues,
@@ -35,7 +34,7 @@ const ResetPassword = (props) => {
       });
     }
     else {
-      props.resetUserPassword({ newPassword, confirmPassword }, props.history); 
+      props.resetUserPassword({ newPassword, confirmPassword }, props.history);
       setFormValues({
         ...fromValues,
         newPassword: '', confirmPassword: '',
@@ -49,7 +48,7 @@ const ResetPassword = (props) => {
   };
 
 
-  
+
 
   const handleChange = e => {
     const target = e.target;

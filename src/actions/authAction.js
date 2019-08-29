@@ -1,7 +1,3 @@
-// actions is tough to understand
-//Actions must have a type
-import axios from "axios";
-import jwt_decode from "jwt-decode";
 import {
   signIn,
   signUp,
@@ -13,15 +9,14 @@ import setAuthorizationToken from "../utilities/setAuthorizationToken";
 
 // import TYPES
 import {
-  GET_ERRORS,
-  SET_CURRENT_USER,
   CHECK_IF_USER_EXISTS,
   CHECK_IF_USER_EXISTS_SUCCESS,
   REGISTERING_USER_START,
   REGISTERING_USER_SUCCESS,
   SIGNIN_USER_START,
   SIGNIN_USER_SUCCESS,
-  SIGNIN_USER_SUCCESS__FAILD
+  SIGNIN_USER_SUCCESS__FAILD,
+  LOGOUT_USER
 } from "./types";
 
 export const checkIfUserExists = (userdata, history) => async (dispatch) => {
@@ -89,70 +84,11 @@ export const signInUser = (userdata, history) => async (dispatch) => {
 };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// when registeruser action get's called uporer function ta fired kore
-
-// Login - Get user token //////////////////////////////////////
-export const loginUser = (userdata) => (dispatch) => {
-  axios
-    .post("/api/users/login", userdata)
-    .then(res => {
-      const {
-        token
-      } = res.data; // get token from res.data
-      localStorage.setItem("jwttoken", token); //save to localstorage
-      setAuthorizationToken(token); // set Authorization token  to header
-      const decoded = jwt_decode(token); // decode token to get user data
-      dispatch(setCurrentUser(decoded)); // set current user
-    })
-    .catch(errors => {
-      dispatch({
-        type: GET_ERRORS,
-        payload: errors.response.data
-      });
-    });
-};
-
 // Log out User
 
-export const logoutUser = () => (dispatch) => {
-  localStorage.removeItem("jwttoken"); // remove the token from localStorage
-  setAuthorizationToken(false); // remove Authorization header 
-  //set currentUser to empty object=>which will set isAuthenticate to false
-  dispatch(setCurrentUser({}));
-};
-
-export const setCurrentUser = (decoded) => {
-  return {
-    type: SET_CURRENT_USER,
-    payload: decoded
-  };
+export const logoutUser = (history) => (dispatch) => {
+  dispatch({
+    type: LOGOUT_USER
+  });
+  history.push('/')
 };
