@@ -19,7 +19,7 @@ export const resetUserPassword = (passwords, history) => async (dispatch) => {
     dispatch({
       type: RESET_PASSWORD_SUCCESS
     });
-    history.push('/welcome')
+    history.push('/signin')
   } catch (error) {
     console.log('something went wrong when reseting the password')
   }

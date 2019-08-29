@@ -16,7 +16,8 @@ import {
   SIGNIN_USER_START,
   SIGNIN_USER_SUCCESS,
   SIGNIN_USER_SUCCESS__FAILD,
-  LOGOUT_USER
+  LOGOUT_USER,
+  REGISTERING_USER_FAIL
 } from "./types";
 
 export const checkIfUserExists = (userdata, history) => async (dispatch) => {
@@ -47,7 +48,6 @@ export const signUpUser = (userdata, history) => async (dispatch) => {
   dispatch({
     type: REGISTERING_USER_START
   });
-  console.log('se', userdata);
   try {
     await signUp(userdata);
     dispatch({
@@ -56,7 +56,12 @@ export const signUpUser = (userdata, history) => async (dispatch) => {
     });
     history.push('/welcome')
   } catch (error) {
-    console.log('something went wrong when registering the user')
+    console.log('something went wrong when signing up')
+    dispatch({
+      type: REGISTERING_USER_FAIL
+    })
+
+    return 'hey'
   }
 };
 
@@ -87,6 +92,8 @@ export const signInUser = (userdata, history) => async (dispatch) => {
 // Log out User
 
 export const logoutUser = (history) => (dispatch) => {
+
+
   dispatch({
     type: LOGOUT_USER
   });

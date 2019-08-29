@@ -21,7 +21,7 @@ const resetPasswordReducer = (state = initialState, action) => {
         return {
           ...state,
           isLoading: false,
-            isPasswordReseted: true
+          isPasswordReseted: true
         };
       default:
         return state;

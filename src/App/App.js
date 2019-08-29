@@ -20,9 +20,24 @@ import SignInSignUp from "../components/signIn-signup/SignInSignUp";
 import PrivateRoute from "../utilities/privateRoute";
 
 
+
 // IMPORT CSS
 import "./App.css";
 
+
+
+//set the users 
+
+const users = [
+  {
+    mobile: '12345678910',
+    password: 'shobhobe'
+  }
+]
+ 
+localStorage.setItem("users", JSON.stringify(users));
+
+// users = JSON.parse(localStorage.getItem("users") || "[]");
 
 
 const App = () => {

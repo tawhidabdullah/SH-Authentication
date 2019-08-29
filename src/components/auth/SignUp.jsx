@@ -22,10 +22,20 @@ const SignUp = (props) => {
       password: "",
     }
   });
-
+  const { isLoading, isErrorWhenAuthenticating } = props.auth;
+  const isAuthErr = isErrorWhenAuthenticating ? true : false;
   const showSnackBar = props.location.state && props.location.state.isUserNotFound ? true : false;
   const [open, setOpen] = React.useState(showSnackBar);
-  const { isLoading } = props.auth;
+
+
+  React.useEffect(() => {
+    if (isErrorWhenAuthenticating) {
+      setOpen(true);
+    }
+  }, [isErrorWhenAuthenticating]);
+
+
+
 
   const handleSubmit = e => {
 
@@ -54,7 +64,7 @@ const SignUp = (props) => {
       props.signUpUser({ mobile, password }, props.history);
       setFormValues({
         ...fromValues,
-        mobile : "", 
+        mobile: "",
         password: ""
       });
     }
@@ -153,7 +163,8 @@ const SignUp = (props) => {
         <SnackBarcomp
           onClose={handleClose}
           variant="error"
-          message="Mobile number not Found. Sign UP!"
+          message={isErrorWhenAuthenticating ?
+            "User not found,Please try agin!" : "Mobile number not Found. Sign UP!"}
         />
       </Snackbar>
     </div>

@@ -4,23 +4,15 @@ import {
   SIGNIN_USER_START,
   SIGNIN_USER_SUCCESS,
   SIGNIN_USER_SUCCESS__FAILD,
-  LOGOUT_USER
+  LOGOUT_USER,
+  REGISTERING_USER_FAIL
 } from '../actions/types'
 
 const initialState = {
-  users: [{
-    mobile: '12345678910',
-    password: 'shobhobe'
-  }],
-  user: {
-    mobile: '12345678910',
-    password: 'shobhobe'
-  },
   isLoading: false,
   isAuthenticated: false,
   isErrorWhenAuthenticating: false
 }
-
 
 // reducer will take 2 argument => actions , initial state
 
@@ -35,15 +27,20 @@ const authReducer = (state = initialState, action) => {
       case REGISTERING_USER_SUCCESS:
         return {
           ...state,
-          users: [...state.users, action.payload],
             isLoading: false,
             isErrorWhenAuthenticating: false,
             isAuthenticated: true
         };
+        case REGISTERING_USER_FAIL:
+          return {
+            ...state,
+              isLoading: false,
+              isErrorWhenAuthenticating: true,
+              isAuthenticated: false
+          };
       case SIGNIN_USER_START:
         return {
           ...state,
-          users: [...state.users, action.payload],
             isLoading: true,
             isAuthenticated: false,
             isErrorWhenAuthenticating: false
