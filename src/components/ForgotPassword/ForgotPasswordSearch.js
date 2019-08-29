@@ -80,6 +80,7 @@ const ForgotPasswordSearch = (props) => {
 
 
   return (
+    <div className='forgotPasswordContainer'>
     <div className="forgotPassword">
       <div className="forgotPassword__head">
         <h1 className="forgotPassword__head__title">
@@ -127,6 +128,7 @@ const ForgotPasswordSearch = (props) => {
           message="Mobile number doesn't exists.Please try again!"
         />
       </Snackbar>
+    </div>
     </div>
   )
 }

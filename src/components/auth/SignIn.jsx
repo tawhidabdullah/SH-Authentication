@@ -113,6 +113,7 @@ const SignIn = (props) => {
   }
 
   return (
+    <div className='authContainer'>
     <div className="mainContent">
       <div className="signin__head">
         <Logo />
@@ -177,6 +178,7 @@ const SignIn = (props) => {
           message="Incorrect Mobile number or password.Please try again!"
         />
       </Snackbar>
+    </div>
     </div>
   )
 }

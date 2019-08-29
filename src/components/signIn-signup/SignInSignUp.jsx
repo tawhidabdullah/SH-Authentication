@@ -68,32 +68,32 @@ const SignInSignUP = (props) => {
 
 
   return (
-    <div className="mainContent">
-      <div className="signin__head">
-        <Logo />
-        <h1 className="signin__head__title">
-          Enter the SobHobe Universe!
+    <div className='authContainer'>
+      <div className="mainContent">
+        <div className="signin__head">
+          <Logo />
+          <h1 className="signin__head__title">
+            Enter the SobHobe Universe!
       </h1>
+        </div>
+        <form className="form" >
+          <MobileFeildGroup
+            name='mobile'
+            placeholder='0154654547'
+            type='tel'
+            onChange={handleChange}
+            value={fromValues.mobile}
+            error={fromValues.formErrors.mobile}
+          />
+          <BtnFullWidth
+            className='btn-fullwidth btn-fullwidth--white'
+            handle={handleSubmit}
+            disabled={!fromValues.mobile ? true : false || isLoading}
+          >
+            {isLoading ? <BtnSpinner /> : 'Sign In / Sign Up'}
+          </BtnFullWidth>
+        </form>
       </div>
-      <form className="form" >
-        <MobileFeildGroup
-          name='mobile'
-          placeholder='0154654547'
-          type='tel'
-          onChange={handleChange}
-          value={fromValues.mobile}
-          error={fromValues.formErrors.mobile}
-        />
-        <BtnFullWidth
-          className='btn-fullwidth btn-fullwidth--white'
-          handle={handleSubmit}
-          disabled={!fromValues.mobile ? true : false || isLoading}
-        >
-          {isLoading ? <BtnSpinner /> : 'Sign In / Sign Up'}
-        </BtnFullWidth>
-      </form>
-
-
     </div>
   )
 }

@@ -116,6 +116,7 @@ const SignUp = (props) => {
   }
 
   return (
+    <div className='authContainer'>
     <div className="mainContent">
       <div className="signin__head">
         <Logo />
@@ -167,6 +168,7 @@ const SignUp = (props) => {
             "User not found,Please try agin!" : "Mobile number not Found. Sign UP!"}
         />
       </Snackbar>
+    </div>
     </div>
   )
 }

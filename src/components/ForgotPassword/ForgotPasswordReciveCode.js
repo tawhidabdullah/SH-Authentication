@@ -90,6 +90,7 @@ const ForgotPasswordReciveCode = (props) => {
 
 
   return (
+    <div className='forgotPasswordContainer'>
     <div className="forgotPassword">
       <div className="forgotPassword__head">
         <h1 className="forgotPassword__head__title">
@@ -177,6 +178,7 @@ const ForgotPasswordReciveCode = (props) => {
           message="Wrong Verification Code.Please Enter the Correct Code!"
         />
       </Snackbar>
+    </div>
     </div>
   )
 }

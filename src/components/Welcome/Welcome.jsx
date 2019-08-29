@@ -20,6 +20,7 @@ const Welcome = () => {
 
 
   return (
+    <div className='welcomeContainer'>
     <div class="welcome">
       <div class="welcome__head">
         <Logo />
@@ -56,6 +57,7 @@ const Welcome = () => {
           </Button>
         </DialogActions>
       </Dialog>
+    </div>
     </div>
   )
 }

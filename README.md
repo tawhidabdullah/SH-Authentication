@@ -1,6 +1,6 @@
 # SH Authentication
 
-## Technologies
+## Built With
 
 * React js, Redux
 * Material ui
