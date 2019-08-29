@@ -5,7 +5,8 @@
 * React js, Redux
 * Material ui
 
-## License
+## Credientials 
+For signin you can use: 
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
+* Mobile: 12345678910
+* Password: shobhobe
