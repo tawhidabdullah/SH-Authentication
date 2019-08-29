@@ -1,6 +1,7 @@
 import {
-  CHECK_IF_USER_EXISTS,
-  CHECK_IF_USER_EXISTS_SUCCESS
+  CHECK_IF_USER_EXISTS_START,
+  CHECK_IF_USER_EXISTS_SUCCESS,
+  CHECK_IF_USER_EXISTS_FAIL
 } from "../actions/types";
 
 
@@ -11,7 +12,7 @@ const initialState = {
 
 const userExists = (state = initialState, action) => {
   switch (action.type) {
-    case CHECK_IF_USER_EXISTS:
+    case CHECK_IF_USER_EXISTS_START:
       return {
         ...state,
         isLoading: true,
@@ -23,8 +24,15 @@ const userExists = (state = initialState, action) => {
           isLoading: false,
             isExists: true
         }
-        default:
-          return state;
+
+        case CHECK_IF_USER_EXISTS_FAIL:
+          return {
+            ...state,
+            isLoading: false,
+              isExists: false
+          }
+          default:
+            return state;
   }
 }
 

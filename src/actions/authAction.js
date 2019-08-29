@@ -4,12 +4,11 @@ import {
   getUserIfExists
 } from "../utilities/signIn";
 
-// import setAuthorizationToken
-import setAuthorizationToken from "../utilities/setAuthorizationToken";
 
 // import TYPES
 import {
-  CHECK_IF_USER_EXISTS,
+  CHECK_IF_USER_EXISTS_START,
+  CHECK_IF_USER_EXISTS_FAIL,
   CHECK_IF_USER_EXISTS_SUCCESS,
   REGISTERING_USER_START,
   REGISTERING_USER_SUCCESS,
@@ -22,7 +21,7 @@ import {
 
 export const checkIfUserExists = (userdata, history) => async (dispatch) => {
   dispatch({
-    type: CHECK_IF_USER_EXISTS
+    type: CHECK_IF_USER_EXISTS_START
   });
   try {
     await getUserIfExists(userdata);
@@ -31,6 +30,9 @@ export const checkIfUserExists = (userdata, history) => async (dispatch) => {
     });
     history.push('/signin')
   } catch (error) {
+    dispatch({
+      type: CHECK_IF_USER_EXISTS_FAIL
+    });
     const userNotFoundSignUp = {
       pathname: '/signup',
       state: {
@@ -38,6 +40,7 @@ export const checkIfUserExists = (userdata, history) => async (dispatch) => {
       }
     };
     history.push(userNotFoundSignUp);
+
     console.log('something went wrong when checking the user if exist')
   }
 };
@@ -92,8 +95,6 @@ export const signInUser = (userdata, history) => async (dispatch) => {
 // Log out User
 
 export const logoutUser = (history) => (dispatch) => {
-
-
   dispatch({
     type: LOGOUT_USER
   });
