@@ -23,14 +23,33 @@ const ResetPassword = (props) => {
     e.preventDefault();
     const { newPassword, confirmPassword } = fromValues;
     const formErrors = { ...fromValues.formErrors };
-    if (!newPassword === confirmPassword) {
-      formErrors.notSame = "Both password must be the same!"
+    if (!newPassword || !confirmPassword) {
+      formErrors.notSame = "Please fill the Password Feild"
+    }
+    else formErrors.notSame = ""
+
+    if (formErrors.notSame) {
+      setFormValues({
+        ...fromValues,
+        formErrors
+      });
+    }
+    else {
+      props.resetUserPassword({ newPassword, confirmPassword }, props.history); 
+      setFormValues({
+        ...fromValues,
+        newPassword: '', confirmPassword: '',
+        formErrors: {
+          notSame: ''
+        }
+      });
+
     }
 
-    setFormValues({ ...fromValues, formErrors });
-
-    props.resetUserPassword({ newPassword, confirmPassword }, props.history)
   };
+
+
+  
 
   const handleChange = e => {
     const target = e.target;

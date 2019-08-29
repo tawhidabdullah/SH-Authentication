@@ -7,17 +7,9 @@ import PasswordFeildGroup from "../commonFeilds/PasswordFeildGroup";
 import BtnFullWidth from "../Button/BtnFullWidth";
 import BtnSpinner from "../Button/BtnSpinner";
 import Snackbar from '@material-ui/core/Snackbar';
-import { makeStyles } from '@material-ui/core/styles';
 import SnackBarcomp from "../../utilities/SnackBarcomp";
 // Acions
 import { signUpUser } from "../../actions/authAction";
-
-
-const useStyles2 = makeStyles(theme => ({
-  margin: {
-    margin: theme.spacing(1),
-  },
-}));
 
 const SignUp = (props) => {
 

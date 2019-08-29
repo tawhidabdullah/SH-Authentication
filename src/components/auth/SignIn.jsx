@@ -9,13 +9,7 @@ import BtnFullWidth from "../Button/BtnFullWidth";
 import BtnSpinner from "../Button/BtnSpinner";
 import { signInUser } from "../../actions/authAction";
 import Snackbar from '@material-ui/core/Snackbar';
-import { makeStyles } from '@material-ui/core/styles';
 import SnackBarcomp from "../../utilities/SnackBarcomp";
-const useStyles2 = makeStyles(theme => ({
-  margin: {
-    margin: theme.spacing(1),
-  },
-}));
 
 
 const SignIn = (props) => {

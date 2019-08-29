@@ -4,6 +4,9 @@ import BtnSpinner from "../Button/BtnSpinner";
 import { SendVerificationCodeAction } from "../../actions/forgotPasswordAction";
 import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackBarcomp from "../../utilities/SnackBarcomp";
+
 
 const ForgotPasswordReciveCode = (props) => {
   const [fromValues, setFormValues] = React.useState({
@@ -16,7 +19,16 @@ const ForgotPasswordReciveCode = (props) => {
     }
   });
 
-  const { isLoading } = props.forgotPassword;
+  const { isLoading, isVerificationInCodeCorrect } = props.forgotPassword;
+  const [open, setOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    if (isVerificationInCodeCorrect) {
+      setOpen(true);
+    }
+  }, [isVerificationInCodeCorrect]);
+
+
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -25,13 +37,28 @@ const ForgotPasswordReciveCode = (props) => {
     if (!code1 || !code2 || !code3 || !code4) {
       formErrors.code = "Please fill out all the code field"
     }
+    else formErrors.code = ""
 
-    setFormValues({ ...fromValues, formErrors });
+    if (formErrors.code) {
+      setFormValues({
+        ...fromValues,
+        formErrors
+      });
+    }
+    else {
+      props.SendVerificationCodeAction({ code1, code2, code3, code4 }, props.history);
+      setFormValues({
+        ...fromValues,
+        code1: '', code2: '', code3: '', code4: '',
+        formErrors: {
+          code: ''
+        }
+      });
 
-    console.log('codes:', { code1, code2, code3, code4 });
 
-    props.SendVerificationCodeAction({ code1, code2, code3, code4 }, props.history);
-  };
+    };
+
+  }
 
   const handleChange = e => {
     const target = e.target;
@@ -40,8 +67,6 @@ const ForgotPasswordReciveCode = (props) => {
       ...fromValues,
       [name]: value
     });
-
-    console.log(fromValues);
   };
 
 
@@ -54,6 +79,13 @@ const ForgotPasswordReciveCode = (props) => {
       [name]: value.replace(regex, code)
     });
 
+  }
+
+  function handleClose(event, reason) {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
   }
 
 
@@ -113,9 +145,9 @@ const ForgotPasswordReciveCode = (props) => {
 
           />
         </div>
-        {/* <label className="forgotPassword__varification-error">
+        <p className="forgotPassword__varification-error">
           {fromValues.formErrors.code === "" ? "" : fromValues.formErrors.code}
-        </label> */}
+        </p>
         <p className='forgotPassword__varification-text'>
           Didn't recieve a code! <span>Resend</span>
         </p>
@@ -123,13 +155,28 @@ const ForgotPasswordReciveCode = (props) => {
           className='btn-fullwidth btn-fullwidth--yellow'
           handle={handleSubmit}
         >
-          {isLoading ? BtnSpinner : 'Send Verification Code'}
+          {isLoading ? <BtnSpinner /> : 'Send Verification Code'}
 
         </BtnFullWidth>
         <p className="forgotPassword__foot__text">
           Back
       </p>
       </div>
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <SnackBarcomp
+          onClose={handleClose}
+          variant="error"
+          message="Wrong Verification Code.Please Enter the Correct Code!"
+        />
+      </Snackbar>
     </div>
   )
 }

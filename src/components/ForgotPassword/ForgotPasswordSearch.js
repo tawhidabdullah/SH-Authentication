@@ -5,7 +5,8 @@ import BtnSpinner from "../Button/BtnSpinner";
 import { forgetPasswordSearchAction } from "../../actions/forgotPasswordAction";
 import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
-
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackBarcomp from "../../utilities/SnackBarcomp";
 
 const ForgotPasswordSearch = (props) => {
   const [fromValues, setFormValues] = React.useState({
@@ -14,8 +15,14 @@ const ForgotPasswordSearch = (props) => {
       mobile: "",
     }
   });
+  const { isLoading, userDoesntExist } = props.forgotPassword;
+  const [open, setOpen] = React.useState(false);
 
-  const { isLoading, isUserExists } = props.forgotPassword
+  React.useEffect(() => {
+    if (userDoesntExist) {
+      setOpen(true);
+    }
+  }, [userDoesntExist]);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -24,10 +31,19 @@ const ForgotPasswordSearch = (props) => {
     if (mobile.length < 11) {
       formErrors.mobile = "Minimum 11 digits required"
     }
-
-    setFormValues({ ...fromValues, formErrors });
-
-    props.forgetPasswordSearchAction(mobile, props.history);
+    if (formErrors.mobile) {
+      setFormValues({
+        ...fromValues,
+        formErrors
+      });
+    }
+    else {
+      props.forgetPasswordSearchAction(mobile, props.history);
+      setFormValues({
+        ...fromValues,
+        mobile: ""
+      });
+    }
 
   };
 
@@ -45,14 +61,23 @@ const ForgotPasswordSearch = (props) => {
       default:
         break;
     }
+
+
     setFormValues({
       ...fromValues,
       formErrors,
       [name]: value
     });
 
-
   };
+
+  function handleClose(event, reason) {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  }
+
 
   return (
     <div className="forgotPassword">
@@ -87,6 +112,21 @@ const ForgotPasswordSearch = (props) => {
           Back
       </p>
       </div>
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <SnackBarcomp
+          onClose={handleClose}
+          variant="error"
+          message="Mobile number doesn't exists.Please try again!"
+        />
+      </Snackbar>
     </div>
   )
 }
