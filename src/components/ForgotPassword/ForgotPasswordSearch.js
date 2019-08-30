@@ -109,7 +109,7 @@ const ForgotPasswordSearch = (props) => {
           {isLoading ? <BtnSpinner /> : "Send Verification Code"}
 
         </BtnFullWidth>
-        <p className="forgotPassword__foot__text">
+        <p className="forgotPassword__foot__text" onClick={()=> props.history.goBack()}>
           Back
       </p>
       </div>

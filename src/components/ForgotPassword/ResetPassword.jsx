@@ -135,7 +135,7 @@ const ResetPassword = (props) => {
 
             {isLoading ? <BtnSpinner /> : ' Reset Password'}
           </BtnFullWidth>
-          <p className="forgotPassword__foot__text">
+          <p className="forgotPassword__foot__text" onClick={()=> props.history.goBack()}>
             Back
       </p>
         </div>
